@@ -12,23 +12,23 @@ deployment:
   enabled: true
   replicaCount: 3
   containers:
-  - name: user-service-api
-    image: youngmin1085/user-service
-    tag: latest
-    ports:
-    - name: http
-      containerPort: 8080
-      protocol: TCP
-    env:
-    - name: SPRING_PROFILES_ACTIVE
-      value: dev
-    resources:
-      requests:
-        cpu: "0.5"
-        memory: "1Gi"
-      limits:
-        cpu: "0.75"
-        memory: "1.5Gi"
+    - name: user-service-api
+      image: youngmin1085/user-service
+      tag: latest
+      ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+      env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: dev
+      resources:
+        requests:
+          cpu: "0.5"
+          memory: "1Gi"
+        limits:
+          cpu: "0.75"
+          memory: "1.5Gi"
 
 ######################################
 # Service Configuration
@@ -36,8 +36,29 @@ deployment:
 service:
   enabled: true
   ports:
-  - name: http
-    port: 8080
-    targetPort: 8080
-    protocol: TCP
+    - name: http
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
   type: ClusterIP
+
+######################################
+# Ingress Config
+######################################
+ingress:
+  enabled: true
+  annotations:
+    backendProtocol: "HTTP" # Ingress와 backend service 간 통신 프로토콜
+    proxyConnectTimeout: "10"
+  ingressClassName: "nginx" # 사용할 ingress controller 지정
+  rules:
+    - host: user.ecommerce.co.kr
+      http:
+        paths:
+          - path: /api/v1/users
+            pathType: Prefix
+            backend:
+              service:
+                name: user-service-svc
+                port:
+                  number: 8080

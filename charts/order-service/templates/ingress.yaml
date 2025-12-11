@@ -30,7 +30,7 @@ spec:
           pathType: {{ .pathType }}
           backend:
             service:
-              name: {{ $.Values.app.labels.env}}-{{ .backend.service.name }}
+              name: {{ $.Values.app.labels.env }}-{{ .backend.service.name }}
               port:
                 number: {{ .backend.service.port.number }}
         {{- end }}
