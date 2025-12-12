@@ -23,6 +23,9 @@ deployment:
     - name: http
       containerPort: 8080
       protocol: TCP
+    env:
+    - name: SPRING_PROFILES_ACTIVE
+      value: local
     resources:
       requests:
         cpu: "0.25"
@@ -42,3 +45,22 @@ service:
     targetPort: 8080
     protocol: TCP
   type: ClusterIP
+
+######################################
+# Ingress Config
+######################################
+ingress:
+  enabled: true
+  annotation: {}
+  ingressClassName: "nginx"
+  rules:
+  - host: localhost
+    http:
+      paths:
+      - path: /api/v1/orders
+        pathType: Prefix
+        backend:
+          service:
+            name: order-service-svc
+            port:
+              number: 8080
