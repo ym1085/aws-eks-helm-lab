@@ -16,7 +16,7 @@ spec:
   ingressClassName: {{ .Values.ingress.ingressClassName }} # ingress가 어떤 ingress Controller에 의해 처리 될지 지정
   {{- if .Values.ingress.rules }}
   rules:
-    {{- range .Values.ingressm.rules }}
+    {{- range .Values.ingress.rules }}
     - {{- if .host }}
       host: {{ .host }}
       {{- end }}
