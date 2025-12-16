@@ -1,3 +1,49 @@
-# AWS EKS Hands On
+# AWS EKS Helm Lab
 
-> EKS 클러스터 생성 후 Hands-On을 진행하기 위한 리포지토리 입니다.
+> A hands-on laboratory repository for practicing Kubernetes deployments on AWS EKS using Helm charts and Helmfile.
+
+## Overview
+
+Deploy microservices to AWS EKS using Helm and Helmfile with multi-environment support.
+
+## Project Structure
+
+```
+.
+├── charts/                    # Helm charts for microservices
+│   ├── order-service/         # Order service Helm chart
+│   └── user-service/          # User service Helm chart
+├── deploy/                    # Deployment configurations
+│   └── helmfile.yaml          # Helmfile for managing releases
+├── manifests/                 # Raw Kubernetes manifests
+│   ├── namespace/             # Namespace definitions
+│   ├── playground/            # Practice manifests (pods, deployments, services)
+│   └── quotas/                # Resource quota configurations
+└── script/                    # Utility scripts
+    └── kind/                  # KIND cluster configurations
+    └── aws-lb-controller/     # AWS ALB Loadbalancer Controller
+```
+
+## Environments
+
+> The project supports multiple environments
+
+- `dev`: Development environment
+- `stg`: Staging environment
+- `prod`: Production environment
+
+## How to use
+
+> Deploy services using Helmfile
+
+```bash
+# Deploy to development environment
+cd deploy
+helmfile -e dev apply
+
+# Deploy to staging environment
+helmfile -e stg apply
+
+# Deploy to production environment
+helmfile -e prod apply
+```
