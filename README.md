@@ -24,6 +24,14 @@ Deploy microservices to AWS EKS using Helm and Helmfile with multi-environment s
     └── aws-lb-controller/     # AWS ALB Loadbalancer Controller
 ```
 
+## Prerequisites
+
+- kubectl v1.34.1
+- Helm v3.x
+- Helmfile v1.1.7
+- Kustomize v5.7.1
+- AWS CLI 2.13.8
+
 ## Environments
 
 > The project supports multiple environments
@@ -32,7 +40,7 @@ Deploy microservices to AWS EKS using Helm and Helmfile with multi-environment s
 - `stg`: Staging environment
 - `prod`: Production environment
 
-## How to use
+## Deployment
 
 > Deploy services using Helmfile
 
