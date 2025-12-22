@@ -10,7 +10,7 @@ app:
 ######################################
 deployment:
   enabled: true
-  replicaCount: 3
+  replicaCount: 2
   containers:
     - name: user-service-api
       image: youngmin1085/user-service
@@ -24,11 +24,11 @@ deployment:
           value: dev
       resources:
         requests:
-          cpu: "0.5"
-          memory: "1Gi"
+          cpu: "0.25"
+          memory: "0.5Gi"
         limits:
-          cpu: "0.75"
-          memory: "1.5Gi"
+          cpu: "0.5"
+          memory: "0.75Gi"
 
 ######################################
 # Service Configuration
