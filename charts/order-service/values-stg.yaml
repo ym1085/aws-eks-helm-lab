@@ -10,26 +10,26 @@ app:
 ######################################
 deployment:
   enabled: true
-  replicaCount: 3
+  replicaCount: 2
   containers:
-  - name: order-service-api
-    image: youngmin1085/order-service
-    tag: latest
-    imagePullPolicy: Always
-    ports:
-    - name: http
-      containerPort: 8081
-      protocol: TCP
-    env:
-    - name: SPRING_PROFILES_ACTIVE
-      value: stg
-    resources:
-      requests:
-        cpu: "1"
-        memory: "1Gi"
-      limits:
-        cpu: "1.5"
-        memory: "2Gi"
+    - name: order-service-api
+      image: youngmin1085/order-service
+      tag: 1.0.0
+      imagePullPolicy: IfNotPresent
+      ports:
+        - name: http
+          containerPort: 8081
+          protocol: TCP
+      env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: stg
+      resources:
+        requests:
+          cpu: "0.25"
+          memory: "0.5Gi"
+        limits:
+          cpu: "0.5"
+          memory: "0.75Gi"
 
 ######################################
 # Service Config
@@ -37,10 +37,10 @@ deployment:
 service:
   enabled: true
   ports:
-  - name: http
-    port: 8081
-    targetPort: 8081
-    protocol: TCP
+    - name: http
+      port: 8081
+      targetPort: 8081
+      protocol: TCP
   type: ClusterIP
 
 ######################################
@@ -56,13 +56,12 @@ ingress:
     proxyBodySize: "8m"
   ingressClassName: "nginx"
   rules:
-  - host: stg-order.ecommerce.co.kr
-    http:
-      paths:
-      - path: /api/v1/orders
-        pathType: Prefix
-        backend:
-          service:
-            name: order-service-svc
-            port:
-              number: 8081
+    - http:
+        paths:
+          - path: /api/v1/orders
+            pathType: Prefix
+            backend:
+              service:
+                name: order-service-svc
+                port:
+                  number: 8081
