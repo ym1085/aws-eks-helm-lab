@@ -10,7 +10,7 @@ app:
 ######################################
 deployment:
   enabled: true
-  replicaCount: 3
+  replicaCount: 2
   containers:
     - name: order-service-api
       image: youngmin1085/order-service
@@ -56,8 +56,7 @@ ingress:
     proxyBodySize: "8m"
   ingressClassName: "nginx"
   rules:
-    - host: dev-order.ecommerce.co.kr
-      http:
+    - http:
         paths:
           - path: /api/v1/orders
             pathType: Prefix

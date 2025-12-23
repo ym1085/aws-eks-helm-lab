@@ -52,8 +52,7 @@ ingress:
     proxyConnectTimeout: "10"
   ingressClassName: "nginx" # 사용할 ingress controller 지정
   rules:
-    - host: user.ecommerce.co.kr
-      http:
+    - http:
         paths:
           - path: /api/v1/users
             pathType: Prefix
