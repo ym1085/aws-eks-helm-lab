@@ -1,27 +1,31 @@
-name: Feature (TODO)
-description: 기능 추가 TODO 체크리스트
+name: "✨ Feature"
+description: "New feature request issue template"
 title: "[Feature]: {기능 제목}"
-labels: [ "feature" ]
-
+labels: ["type: feat"]
 body:
-- type: textarea
-  id: todo
-  attributes:
-    label: TODO
-    description: 기능 구현을 위한 주요 작업을 체크리스트로 작성하세요.
-    placeholder: |
-      - [ ] Helm Chart 생성
-      - [ ] Deployment 적용
-      - [ ] Service 생성 및 확인
-      - [ ] Ingress 라우팅 추가
-      - [ ] 모니터링 (kubectl get pods / svc)
-  validations:
-    required: true
+  - type: textarea
+    attributes:
+      label: 📄 Description
+      description: Please describe the new feature.
+      placeholder: The more detail, the better.
+    validations:
+      required: true
 
-- type: input
-  id: related
-  attributes:
-    label: 관련 이슈(Optional)
-    placeholder: "#14"
-  validations:
-    required: false
+  - type: textarea
+    id: tasks
+    attributes:
+      label: ✅ Tasks
+      description: Write tasks using GitHub task list syntax (- [ ]).
+      placeholder: |
+        - [ ] 주문 API 구현
+        - [ ] 주문 API 테스트코드 작성
+    validations:
+      required: true
+
+  - type: input
+    id: related
+    attributes:
+      label: 🚨 관련 이슈(Optional)
+      placeholder: "#14"
+    validations:
+      required: false
