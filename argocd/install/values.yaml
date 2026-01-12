@@ -1,0 +1,17 @@
+# ArgoCD Helm Chart Custom Values
+server:
+  service:
+    # NodePort로 설정하여 외부 접속 가능하도록 서정
+    type: NodePort
+    nodePortHttp: 30080
+    nodePortHttps: 30443
+
+  # HTTP 접속 허용 (로컬 개발 환경용)
+  extraArgs:
+  - --insecure
+
+# ArgoCD UI 설정
+configs:
+  params:
+    # HTTPS 없이 HTTP로 접속 허용
+    server.insecure: true
