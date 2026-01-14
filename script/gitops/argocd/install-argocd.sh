@@ -4,6 +4,18 @@ echo "======================================"
 echo "Installing ArgoCD Service on kind k8s cluster"
 echo "======================================"
 
+echo "개발 환경을 선택 해주세요"
+echo "1: dev, 2:stg, 3:prod"
+read -p "번호를 입력하세요: " ENV_NUM
+case "${ENV_NUM}" in
+    1) PROFILE="dev";;
+    2) PROFILE="stg";;
+    3) PROFILE="prod";;
+    *) 
+      echo "잘못된 입력입니다. 1, 2, 3 중 하나를 선택해주세요." 
+      exit 1;;
+esac
+
 # 기존 namespace 삭제 (있을 경우)
 echo "0. 기존 ArgoCD namespace 삭제 중..."
 kubectl delete namespace argocd --ignore-not-found=true
@@ -32,12 +44,12 @@ echo "3. ArgoCD 설치 중 (Helm)"
 helm install argocd argo/argo-cd \
     --namespace argocd \
     --version 5.51.6 \
-    -f "$ARGOCD_DIR/argocd/install/values.yaml" \
+    -f "$ARGOCD_DIR/argocd/install/${PROFILE}/values.yaml" \
     --wait
 
 # AppProject 생성
 echo "4. AppProject 생성 중..."
-kubectl apply -f "$ARGOCD_DIR/argocd/appprojects/dev-project.yaml"
+kubectl apply -f "$ARGOCD_DIR/argocd/appprojects/${PROFILE}/project.yaml"
 
 # ArgoCD 서버 Pod가 준비될때까지 대기
 echo "5. ArgoCD 서버 Pod가 준비될때까지 대기..."
