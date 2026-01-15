@@ -2,20 +2,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: dev
+  name: dev-project
   namespace: argocd
 spec:
   description: "ArgoCD Dev Environment Project"
   sourceRepos:
-  # ArgoCD가 Helm 차트를 가져올 수 있는 Git 저장소 지정
-  - "https://github.com/ym1085/aws-eks-helm-lab.git"
+    - "https://github.com/ym1085/aws-eks-helm-lab.git" # ArgoCD가 Helm 차트를 가져올 수 있는 Git 저장소 지정
   # 배포 가능한 대상 네임스페이스 지정
   destinations:
-  - namespace: 'dev-*' # k8s 클러스터 내에서, 특정 ns 지정
-    server: https://kubernetes.default.svc # 배포 대상 k8s 클러스터 API Server
-  - namespace: 'argocd'
-    server: https://kubernetes.default.svc
+    - namespace: "dev-*" # k8s 클러스터 내에서, 특정 ns 지정
+      server: https://kubernetes.default.svc # 배포 대상 k8s 클러스터 API Server
+    - namespace: "argocd"
+      server: https://kubernetes.default.svc
   # ArgoCD가 모든 클러스터 리소스에 대해 CRUD 작업 수행 가능
   clusterResourceWhitelist:
-  - group: "*" # 모든 API Group 제어 가능
-    kind: "*" # 위 API Group 내의 모든 리소스 제어 가능
+    - group: "*" # 모든 API Group 제어 가능
+      kind: "*" # 위 API Group 내의 모든 리소스 제어 가능
