@@ -7,17 +7,17 @@ environments:
 releases:
   - name: order-service
     namespace: "{{ .Environment.Name }}-order-ns"
-    chart: "../charts/order-service"
+    chart: "./charts/order-service"
     values:
-      - "../charts/order-service/values.yaml"
-      - "../charts/order-service/values-{{ .Environment.Name }}.yaml"
+      - "./charts/order-service/values.yaml"
+      - "./charts/order-service/values-{{ .Environment.Name }}.yaml"
 
   - name: user-service
     namespace: "{{ .Environment.Name }}-user-ns"
-    chart: "../charts/user-service"
+    chart: "./charts/user-service"
     values:
-      - "../charts/user-service/values.yaml"
-      - "../charts/user-service/values-{{ .Environment.Name }}.yaml"
+      - "./charts/user-service/values.yaml"
+      - "./charts/user-service/values-{{ .Environment.Name }}.yaml"
 
   - name: ingress-nginx
     namespace: ingress-nginx
