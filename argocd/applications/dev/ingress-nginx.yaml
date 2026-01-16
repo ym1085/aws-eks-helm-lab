@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dev-ingress-nginx
+  namespace: argocd
+spec:
+  project: dev-project
+
+  source:
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    chart: ingress-nginx
+    targetRevision: 4.11.0
+    helm:
+      values: |
+        controller:
+          hostNetwork: true
+          service:
+            type: NodePort
+            nodePorts:
+              http: 30080
+              https: 30443
+          admissionWebhook:
+            enabled: false
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ingress-nginx
+
+  syncPolicy:
+    automated: # 자동 동기화 활성화
+      prune: true # Git에서 삭제된 리소스를 실제 클러스터에서도 자동 삭제할지 여부
+      selfHeal: true # 클러스터 리소스가 수동으로 수정되어 Git과 달라졌을 때 자동으로 복구(동기화) 할지 여부
+    syncOptions:
+      - CreateNamespace=true # 네임스페이스가 없으면 자동으로 생성
+      - ServerSideApply=true # 서버 사이드 적용을 사용하여 리소스를 동기화
+      - PruneLast=true # 마지막으로 삭제된 리소스를 클러스터에서도 삭제

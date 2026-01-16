@@ -8,12 +8,18 @@ kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 name: helm-cluster
 nodes:
-  - role: control-plane
-  - role: worker
-    extraPortMappings:
-      - hostPort: 30080
-        containerPort: 30080 # HTTP -> Ingress Controller(30080) svc -> Ingress Controller(Ingress 규칙 읽음) pod  -> svc -> pod
-        protocol: TCP
-      - hostPort: 30443
-        containerPort: 30443 # HTTPS
-        protocol: TCP
+- role: control-plane
+- role: worker
+  extraPortMappings:
+  - hostPort: 30080
+    containerPort: 30080 # HTTP -> Ingress Controller(30080) svc -> Ingress Controller(Ingress 규칙 읽음) pod  -> svc -> pod
+    protocol: TCP
+  - hostPort: 30443
+    containerPort: 30443 # HTTPS
+    protocol: TCP
+  - hostPort: 30180
+    containerPort: 30180 # ArgoCD HTTP
+    protocol: TCP
+  - hostPort: 30543
+    containerPort: 30543 # ArgoCD HTTPS
+    protocol: TCP
