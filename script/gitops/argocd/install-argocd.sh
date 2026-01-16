@@ -23,7 +23,7 @@ echo " 삭제 완료 대기"
 kubectl wait --for=delete namespace/argocd --timeout=60s >/dev/null || true
 
 # 경로 계산
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$BASH_SOURCE[0]")" && pwd)"
 ARGOCD_DIR="$SCRIPT_DIR/../../.."
 echo -e "ARGOCD_DIR: $ARGOCD_DIR\n"
 sleep 5
@@ -51,8 +51,12 @@ helm install argocd argo/argo-cd \
 echo "4. AppProject 생성 중..."
 kubectl apply -f "$ARGOCD_DIR/argocd/appprojects/${PROFILE}/project.yaml"
 
+# Applications 생성
+echo "5. Applications 생성 중..."
+kubectl apply -f "$ARGOCD_DIR/argocd/applications/${PROFILE}/"
+
 # ArgoCD 서버 Pod가 준비될때까지 대기
-echo "5. ArgoCD 서버 Pod가 준비될때까지 대기..."
+echo "6. ArgoCD 서버 Pod가 준비될때까지 대기..."
 kubectl wait \
     --for=condition=ready pod \
     -l app.kubernetes.io/name=argocd-server \

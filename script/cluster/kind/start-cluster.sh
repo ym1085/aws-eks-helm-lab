@@ -4,7 +4,9 @@ echo "==================================="
 echo " Kubernetes in Docker (kind) Setup "
 echo "==================================="
 echo
-KIND_CONFIG=$(ls *.yaml | head -n 1)
+# 스크립트 파일이 위치한 디렉토리의 절대 경로를 구함
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+KIND_CONFIG=$(ls "${SCRIPT_DIR}"/*.yaml 2>/dev/null | head -n 1)
 if [[ -z $KIND_CONFIG ]]; then
   echo '파일이 존재하지 않습니다.'
   exit 1
