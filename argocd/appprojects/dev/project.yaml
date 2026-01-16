@@ -7,9 +7,10 @@ metadata:
 spec:
   description: "ArgoCD Dev Environment Project"
 
-  # ArgoCD가 Helm 차트를 가져올 수 있는 Git 저장소 지정
+  # ArgoCD가 소스를 가져올 수 있는 저장소 지정 (Git, Helm repo 등)
   sourceRepos:
     - "https://github.com/ym1085/aws-eks-helm-lab.git"
+    - "https://kubernetes.github.io/ingress-nginx"
 
   # ArgoCD가 배포할 수 있는 네임스페이스를 제한하는 설정
   destinations:
