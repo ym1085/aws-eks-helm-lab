@@ -33,5 +33,5 @@ spec:
     syncOptions:
       - CreateNamespace=true # 네임스페이스가 없으면 자동으로 생성
       - ServerSideApply=true # 서버 사이드 적용을 사용하여 리소스를 동기화
-      - Validate=false # TODO: 스키마 검증 비활성화 (임시)
-      - PruneLast=true # 마지막으로 삭제된 리소스를 클러스터에서도 삭제
+      - ServerSideDiff=true
+      - PruneLast=true # 새 리소스 생성/수정이 모두 끝난 뒤, 마지막 단계에서 prune(삭제)를 수행한다
