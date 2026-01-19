@@ -40,10 +40,12 @@ helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
 
 # ArgoCD 설치 (Helm + values.yaml)
+# https://artifacthub.io/packages/helm/argo/argo-cd
+ARGOCD_VERSION=9.3.4
 echo "3. ArgoCD 설치 중 (Helm)"
 helm install argocd argo/argo-cd \
     --namespace argocd \
-    --version 5.51.6 \
+    --version $ARGOCD_VERSION \
     -f "$ARGOCD_DIR/argocd/install/${PROFILE}/values.yaml" \
     --wait
 
