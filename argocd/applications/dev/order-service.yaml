@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dev-order-service # Argo CD UI 및 CLI에서 식별할 애플리케이션의 고유 이름
+  name: order-service # Argo CD UI 및 CLI에서 식별할 애플리케이션의 고유 이름
   namespace: argocd # Argo CD 컨트롤러가 설치된 네임스페이스 (기본값은 보통 'argocd')
 spec:
   project: dev-project # 애플리케이션을 논리적으로 그룹화하는 프로젝트 이름 (RBAC 밎 접근 제어에 활용)

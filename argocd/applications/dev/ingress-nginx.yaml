@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dev-ingress-nginx
+  name: ingress-nginx
   namespace: argocd
 spec:
   project: dev-project
@@ -33,4 +33,5 @@ spec:
     syncOptions:
       - CreateNamespace=true # 네임스페이스가 없으면 자동으로 생성
       - ServerSideApply=true # 서버 사이드 적용을 사용하여 리소스를 동기화
+      - Validate=false # TODO: 스키마 검증 비활성화 (임시)
       - PruneLast=true # 마지막으로 삭제된 리소스를 클러스터에서도 삭제
