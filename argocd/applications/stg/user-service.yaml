@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: user-service
+  namespace: argocd
+spec:
+  project: stg-project
+
+  source:
+    repoURL: https://github.com/ym1085/aws-eks-helm-lab.git
+    targetRevision: stg
+    path: charts/user-service
+    helm:
+      valueFiles:
+        - values-stg.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: stg-user-service
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - ServerSideDiff=true
+      - PruneLast=true
