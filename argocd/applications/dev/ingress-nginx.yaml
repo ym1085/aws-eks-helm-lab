@@ -13,10 +13,9 @@ spec:
     helm:
       values: |
         controller:
-          hostNetwork: true
           service:
             type: NodePort
-            nodePorts:
+            nodePorts: # NodePort를 사용하여 hostPort와 containerPort를 매핑
               http: 30080
               https: 30443
           admissionWebhook:

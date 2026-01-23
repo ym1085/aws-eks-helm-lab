@@ -13,7 +13,6 @@ spec:
     helm:
       values: |
         controller:
-          hostNetwork: true
           service:
             type: NodePort
             nodePorts:
