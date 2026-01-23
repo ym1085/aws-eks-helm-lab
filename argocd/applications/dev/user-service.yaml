@@ -8,7 +8,7 @@ spec:
 
   source:
     repoURL: https://github.com/ym1085/aws-eks-helm-lab.git
-    targetRevision: master
+    targetRevision: dev
     path: charts/user-service
     helm:
       valueFiles:

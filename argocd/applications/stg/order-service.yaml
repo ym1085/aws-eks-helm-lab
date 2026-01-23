@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: stg-order-service # Argo CD UI 및 CLI에서 식별할 애플리케이션의 고유 이름
+  namespace: argocd # Argo CD 컨트롤러가 설치된 네임스페이스 (기본값은 보통 'argocd')
+spec:
+  project: stg-project
+
+  source:
+    repoURL: https://github.com/ym1085/aws-eks-helm-lab.git
+    targetRevision: stg # 바라볼 Git Branch/Tag 변경
+    path: charts/order-service
+    helm:
+      releaseName: order-service # 리소스 이름 중복 방지 (stg-stg-order 제거)
+      valueFiles:
+        - values-stg.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: stg-order-service
+
+  syncPolicy:
+    automated:
+      prune: true # Git에서 삭제된 리소스를 실제 클러스터에서도 자동 삭제
+      selfHeal: true # 클러스터 리소스가 수동으로 수정되어 Git과 달라졌을 때 자동으로 복구(동기화)
+    syncOptions:
+      - CreateNamespace=true # Namespace가 없는 경우 ArgoCD가 생성
+      - ServerSideApply=true # YAML 파일 계산(수정)을 API Server에서 처리
+      - ServerSideDiff=true # Diff 계산을 API Server에서 처리
+      - PruneLast=true # 리소스 삭제 시 생성을 먼저 하고 마지막에 처리
