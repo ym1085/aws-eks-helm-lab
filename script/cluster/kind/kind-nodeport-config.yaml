@@ -11,6 +11,7 @@ nodes:
   - role: control-plane
   - role: worker
     extraPortMappings:
+      # --- DEV ENV ---
       - hostPort: 30080
         containerPort: 30080 # HTTP -> Ingress Controller(30080) svc -> Ingress Controller(Ingress 규칙 읽음) pod  -> svc -> pod
         protocol: TCP
@@ -22,4 +23,18 @@ nodes:
         protocol: TCP
       - hostPort: 30543
         containerPort: 30543 # ArgoCD HTTPS
+        protocol: TCP
+
+      # --- STG ENV ---
+      - hostPort: 31080
+        containerPort: 31080 # HTTP -> Ingress Controller(31080) svc -> Ingress Controller(Ingress 규칙 읽음) pod  -> svc -> pod
+        protocol: TCP
+      - hostPort: 31443
+        containerPort: 31443 # HTTPS
+        protocol: TCP
+      - hostPort: 31180
+        containerPort: 31180 # ArgoCD HTTP
+        protocol: TCP
+      - hostPort: 31543
+        containerPort: 31543 # ArgoCD HTTPS
         protocol: TCP
