@@ -20,7 +20,7 @@ releases:
       - "./charts/user-service/values-{{ .Environment.Name }}.yaml"
 
   - name: ingress-nginx
-    namespace: ingress-nginx
+    namespace: "{{ .Environment.Name }}-ingress-nginx-ns"
     chart: ingress-nginx/ingress-nginx
     version: 4.11.0
     values:

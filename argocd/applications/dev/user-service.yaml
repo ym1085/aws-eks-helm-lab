@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: user-service
+  name: dev-user-service
   namespace: argocd
 spec:
   project: dev-project
@@ -16,7 +16,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc # 클러스터의 API 서버 주소
-    namespace: dev-user-service # 애플리케이션을 배포할 네임스페이스
+    namespace: dev-user-ns # 애플리케이션을 배포할 네임스페이스
 
   syncPolicy:
     automated: # 자동 동기화 활성화

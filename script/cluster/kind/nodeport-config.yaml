@@ -42,3 +42,19 @@ nodes:
       - hostPort: 31543
         containerPort: 31543 # hostPort(31543) -> ArgoCD svc(31543) -> ArgoCD pod  -> svc -> pod
         protocol: TCP
+
+      # --- PROD ENV ---
+      # Ingress
+      - hostPort: 32080
+        containerPort: 32080 # hostPort(32080) -> Ingress svc(32080) -> Ingress pod  -> svc -> pod
+        protocol: TCP
+      - hostPort: 32443
+        containerPort: 32443 # hostPort(32443) -> Ingress svc(32443) -> Ingress pod  -> svc -> pod
+        protocol: TCP
+      # ArgoCD
+      - hostPort: 32180
+        containerPort: 32180 # hostPort(32180) -> ArgoCD svc(32180) -> ArgoCD pod  -> svc -> pod
+        protocol: TCP
+      - hostPort: 32543
+        containerPort: 32543 # hostPort(32543) -> ArgoCD svc(32543) -> ArgoCD pod  -> svc -> pod
+        protocol: TCP
