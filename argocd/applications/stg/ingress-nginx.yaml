@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ingress-nginx
+  name: stg-ingress-nginx
   namespace: argocd
 spec:
   project: stg-project
@@ -13,7 +13,6 @@ spec:
     helm:
       values: |
         controller:
-          hostNetwork: true
           service:
             type: NodePort
             nodePorts:
@@ -24,7 +23,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: ingress-nginx
+    namespace: stg-ingress-nginx-ns
 
   syncPolicy:
     automated:

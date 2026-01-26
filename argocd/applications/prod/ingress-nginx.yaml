@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prod-ingress-nginx
+  namespace: argocd
+spec:
+  project: prod-project
+
+  source:
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    chart: ingress-nginx
+    targetRevision: 4.11.0
+    helm:
+      values: |
+        controller:
+          service:
+            type: NodePort
+            nodePorts:
+              http: 32080
+              https: 32443
+          admissionWebhook:
+            enabled: false
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod-ingress-nginx-ns
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - ServerSideDiff=true
+      - PruneLast=true

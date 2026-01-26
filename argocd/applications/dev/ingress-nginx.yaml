@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ingress-nginx
+  name: dev-ingress-nginx
   namespace: argocd
 spec:
   project: dev-project
@@ -13,10 +13,9 @@ spec:
     helm:
       values: |
         controller:
-          hostNetwork: true
           service:
             type: NodePort
-            nodePorts:
+            nodePorts: # NodePort를 사용하여 hostPort와 containerPort를 매핑
               http: 30080
               https: 30443
           admissionWebhook:
@@ -24,7 +23,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: ingress-nginx
+    namespace: dev-ingress-nginx-ns
 
   syncPolicy:
     automated: # 자동 동기화 활성화
