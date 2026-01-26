@@ -11,13 +11,12 @@ spec:
     targetRevision: stg # 바라볼 Git Branch/Tag 변경
     path: charts/order-service
     helm:
-      releaseName: order-service # 리소스 이름 중복 방지 (stg-stg-order 제거)
       valueFiles:
         - values-stg.yaml
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: stg-order-service
+    namespace: stg-order-ns
 
   syncPolicy:
     automated:
