@@ -10,20 +10,26 @@ Deploy microservices to AWS EKS using Helm and Helmfile with multi-environment s
 
 ```shell
 .
-├── argocd/                              # ArgoCD GitOps configurations
-│   ├── applications/                    # Application definitions
-│   │   └── dev/
-│   ├── appprojects/                     # AppProject definitions
-│   │   └── dev/
-│   └── install/                         # ArgoCD installation settings
-│       └── dev/
-├── charts/                              # Helm charts for microservices
+├── argocd/                              # ArgoCD GitOps
+│   ├── applications/                    # Application
+│   │   ├── dev/
+│   │   ├── prod/
+│   │   └── stg/
+│   ├── appprojects/                     # AppProject
+│   │   ├── dev/
+│   │   ├── prod/
+│   │   └── stg/
+│   └── install/                         # ArgoCD installation
+│       ├── dev/
+│       ├── prod/
+│       └── stg/
+├── charts/                              # Helm charts
 │   ├── order-service/
 │   │   └── templates/
 │   └── user-service/
 │       └── templates/
-├── manifests/                           # Raw Kubernetes manifests
-│   └── lab/                             # Practice manifests
+├── manifests/                           # Raw Kubernetes
+│   └── lab/                             # Practice
 │       ├── deployment/
 │       ├── namespace/
 │       ├── pod/
@@ -31,13 +37,12 @@ Deploy microservices to AWS EKS using Helm and Helmfile with multi-environment s
 │       └── service/
 ├── script/                              # Utility scripts
 │   ├── cluster/
-│   │   └── kind/                        # KIND cluster configurations
+│   │   └── kind/                        # KIND cluster
 │   ├── gitops/
-│   │   └── argocd/                      # ArgoCD installation script
+│   │   └── argocd/                      # ArgoCD installation
 │   └── infrastructure/
 │       └── ingress-controller/
-│           └── alb/                     # AWS ALB Controller
-└── helmfile.yaml                        # Helmfile configuration
+└── helmfile.yaml                        # Helmfile
 ```
 
 ## Prerequisites
@@ -59,34 +64,37 @@ Deploy microservices to AWS EKS using Helm and Helmfile with multi-environment s
 
 ## Deployment
 
-### Using Helmfile
-
-> Deploy services using Helmfile
+### 1. Create Kind Cluster
 
 ```bash
-# Deploy to dev environment
-helmfile -e dev -l name=order-service apply
-helmfile -e dev -l name=user-service apply
-
-# Deploy to stg environment
-helmfile -e stg -l name=order-service apply
-helmfile -e stg -l name=user-service apply
-
-# Deploy to prod environment
-helmfile -e prod -l name=order-service apply
-helmfile -e prod -l name=user-service apply
+./script/cluster/kind/start-cluster.sh
 ```
 
-### Using ArgoCD
-
-> Deploy services using ArgoCD
+### 2. Deploy with Helmfile
 
 ```bash
-# Install argocd
+# Deploy all services
+helmfile -e dev apply
+
+# Deploy specific service
+helmfile -e dev -l name=order-service apply
+helmfile -e dev -l name=user-service apply
+helmfile -e dev -l name=ingress-controller apply
+
+# Verify deployment
+kubectl get pods -A
+```
+
+### 3. Deploy with ArgoCD
+
+```bash
+# Install ArgoCD (select env: 1=dev, 2=stg, 3=prod)
 ./script/gitops/argocd/install-argocd.sh
 
-# Access ArgoCD UI
-# URL: http://localhost:30180
-# Username: admin
-# Password: kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+# Access UI
+kubectl port-forward svc/argocd-server 8080:443 -n argocd
+# https://localhost:8080
+
+# Get password
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
