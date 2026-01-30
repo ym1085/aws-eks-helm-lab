@@ -10,7 +10,7 @@ app:
 ######################################
 deployment:
   enabled: true
-  replicaCount: 2
+  replicaCount: 3
   containers:
     - name: order-service-api
       image: youngmin1085/order-service
