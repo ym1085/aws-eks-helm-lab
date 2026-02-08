@@ -19,9 +19,6 @@ spec:
     namespace: prod-user-ns
 
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
