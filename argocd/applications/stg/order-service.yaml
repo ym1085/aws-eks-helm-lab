@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: order-service # Argo CD UI 및 CLI에서 식별할 애플리케이션의 고유 이름
+  name: stg-order-service # Argo CD UI 및 CLI에서 식별할 애플리케이션의 고유 이름
   namespace: argocd # Argo CD 컨트롤러가 설치된 네임스페이스 (기본값은 보통 'argocd')
 spec:
   project: stg-project
