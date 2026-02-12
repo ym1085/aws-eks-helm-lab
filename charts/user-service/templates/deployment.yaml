@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.app.labels.env }}-{{ .Release.Name }}-deploy
+  name: {{ .Release.Name }}-deploy
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "app.commonLabels" . | nindent 4 }}

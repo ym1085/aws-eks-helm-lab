@@ -46,8 +46,14 @@ echo "3. ArgoCD 설치 중 (Helm)"
 helm install argocd argo/argo-cd \
     --namespace argocd \
     --version $ARGOCD_VERSION \
-    -f "$ARGOCD_DIR/argocd/install/${PROFILE}/values.yaml" \
+    -f "$ARGOCD_DIR/argocd/install/${PROFILE}/core/values.yaml" \
     --wait
+
+# Image Updater 설치
+helm install argocd-image-updater argo/argocd-image-updater \
+    --namespace argocd \
+    --version 0.12.0 \
+    -f "$ARGOCD_DIR/argocd/install/${PROFILE}/image-updater/values.yaml"
 
 # AppProject 생성
 echo "4. AppProject 생성 중..."
