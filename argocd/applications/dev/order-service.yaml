@@ -8,6 +8,7 @@ metadata:
   annotations:
     argocd-image-updater.argoproj.io/image-list: "order-api=youngmin1085/order-service"
     argocd-image-updater.argoproj.io/order-api.update-strategy: "digest"
+    argocd-image-updater.argoproj.io/order-api.allow-tags: "regexp:^dev$"
     argocd-image-updater.argoproj.io/write-back-method: git
 spec:
   project: dev-project # 애플리케이션을 논리적으로 그룹화하는 프로젝트 이름 (RBAC 밎 접근 제어에 활용)

@@ -6,6 +6,7 @@ metadata:
   annotations:
     argocd-image-updater.argoproj.io/image-list: "user-api=youngmin1085/user-service"
     argocd-image-updater.argoproj.io/user-api.update-strategy: "digest"
+    argocd-image-updater.argoproj.io/user-api.allow-tags: "regexp:^dev$"
     argocd-image-updater.argoproj.io/write-back-method: git
 spec:
   project: dev-project
