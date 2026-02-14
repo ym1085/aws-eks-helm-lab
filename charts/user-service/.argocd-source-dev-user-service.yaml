@@ -1,0 +1,8 @@
+helm:
+  parameters:
+  - name: image.name
+    value: youngmin1085/user-service
+    forcestring: true
+  - name: image.tag
+    value: dev@sha256:f59ec7cea4be391ce1d94c3ddec136a4873e68f9b2e716f820096ef5ca41ce52
+    forcestring: true
