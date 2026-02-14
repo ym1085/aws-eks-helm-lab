@@ -4,5 +4,5 @@ helm:
     value: youngmin1085/order-service
     forcestring: true
   - name: image.tag
-    value: dev@sha256:ee7683ea17060028c333854013d5c0f5616ef7f0995d92db6bd1ea6d60124ea9
+    value: dev@sha256:d9f8dea18ea76ca3d257c56136ed17b7e5edabeb65437bc91d0110d62a240e79
     forcestring: true
