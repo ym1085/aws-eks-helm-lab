@@ -5,8 +5,10 @@ metadata:
   namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/image-list: "user-api=youngmin1085/user-service"
-    argocd-image-updater.argoproj.io/user-api.update-strategy: "digest"
-    argocd-image-updater.argoproj.io/user-api.allow-tags: "regexp:^dev$"
+    argocd-image-updater.argoproj.io/user-api.update-strategy: "newest-build"
+    argocd-image-updater.argoproj.io/user-api.allow-tags: "regexp:^dev-[a-f0-9]{7}$"
+    argocd-image-updater.argoproj.io/user-api.helm.image-name: deployment.containers[0].image
+    argocd-image-updater.argoproj.io/user-api.helm.image-tag: deployment.containers[0].tag
     argocd-image-updater.argoproj.io/write-back-method: git
 spec:
   project: dev-project
