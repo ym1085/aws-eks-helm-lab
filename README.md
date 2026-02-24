@@ -2,7 +2,9 @@
 
 ## Overview
 
-Helm과 ArgoCD를 활용한 GitOps 기반 배포 환경 구성을 위한 리포지토리 입니다.
+![GitOps Flow](./docs/images/gitops-flow.png)
+
+Helm과 ArgoCD를 활용하여 GitOps 기반의 배포 환경을 구성하는 리포지토리입니다. 또한 ArgoCD Image Updater를 통해 CI와 CD를 분리하여 운영합니다.
 
 ## Project Structure
 
@@ -15,7 +17,11 @@ Helm과 ArgoCD를 활용한 GitOps 기반 배포 환경 구성을 위한 리포�
 │       │   ├── core/
 │       │   └── image-updater/
 │       ├── stg/
+│       │   ├── core/
+│       │   └── image-updater/
 │       └── prod/
+│           ├── core/
+│           └── image-updater/
 ├── charts/                 # Helm charts
 │   ├── order-service/
 │   └── user-service/
@@ -23,7 +29,7 @@ Helm과 ArgoCD를 활용한 GitOps 기반 배포 환경 구성을 위한 리포�
 ├── script/
 │   ├── cluster/kind/       # Local cluster setup
 │   ├── gitops/argocd/      # ArgoCD setup
-│   └── infrastructure/
+│   └── infrastructure/     # AWS EKS, ALB Ingress Controller..
 └── helmfile.yaml
 ```
 
