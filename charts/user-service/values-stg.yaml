@@ -14,7 +14,7 @@ deployment:
   containers:
     - name: user-service-api
       image: youngmin1085/user-service
-      tag: latest
+      tag: stg
       imagePullPolicy: Always
       ports:
         - name: http
