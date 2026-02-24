@@ -14,7 +14,7 @@ deployment:
   containers:
     - name: order-service-api
       image: youngmin1085/order-service
-      tag: 1.0.0
+      tag: stg
       imagePullPolicy: IfNotPresent
       ports:
         - name: http
