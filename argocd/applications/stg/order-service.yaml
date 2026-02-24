@@ -3,6 +3,13 @@ kind: Application
 metadata:
   name: stg-order-service # Argo CD UI 및 CLI에서 식별할 애플리케이션의 고유 이름
   namespace: argocd # Argo CD 컨트롤러가 설치된 네임스페이스 (기본값은 보통 'argocd')
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: "order-api=youngmin1085/order-service"
+    argocd-image-updater.argoproj.io/order-api.update-strategy: "newest-build"
+    argocd-image-updater.argoproj.io/order-api.allow-tags: "regexp:^stg-[a-f0-9]{7}$"
+    argocd-image-updater.argoproj.io/order-api.helm.image-name: deployment.containers[0].image # values-stg.yaml의 deployment.containers[0].image
+    argocd-image-updater.argoproj.io/order-api.helm.image-tag: deployment.containers[0].tag # values-stg.yaml의 deployment.containers[0].tag
+    argocd-image-updater.argoproj.io/write-back-method: git
 spec:
   project: stg-project
 
