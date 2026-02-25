@@ -2,7 +2,7 @@
 
 ## Overview
 
-![GitOps Flow](./docs/images/gitops-flow.png)
+![GitOps Flow](./docs/images/gitops.png)
 
 Helm과 ArgoCD를 활용하여 GitOps 기반의 배포 환경을 구성하는 리포지토리입니다. 또한 ArgoCD Image Updater를 통해 CI와 CD를 분리하여 운영합니다.
 
