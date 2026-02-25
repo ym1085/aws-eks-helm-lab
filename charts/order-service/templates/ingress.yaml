@@ -16,7 +16,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-send-timeout: {{ .Values.ingress.annotation.proxySendTimeout | default "60" | quote }}
     nginx.ingress.kubernetes.io/proxy-body-size: {{ .Values.ingress.annotation.proxyBodySize | default "8m" | quote }}
 spec:
-  ingressClassName: {{ .Values.ingress.ingressClassName }}
+  ingressClassName: {{ .Values.ingress.ingressClassName }} # ingress 리소스를 어떤 ingress controller가 처리할 것인지 지정
   {{- if .Values.ingress.rules }}
   rules:
     {{- range .Values.ingress.rules }}
