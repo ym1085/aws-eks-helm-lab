@@ -10,7 +10,7 @@ app:
 ######################################
 deployment:
   enabled: true
-  replicaCount: 2
+  replicaCount: 1
   containers:
     - name: order-service-api
       image: youngmin1085/order-service
@@ -18,7 +18,7 @@ deployment:
       imagePullPolicy: IfNotPresent
       ports:
         - name: http
-          containerPort: 8081
+          containerPort: 8081 
           protocol: TCP
       env:
         - name: SPRING_PROFILES_ACTIVE

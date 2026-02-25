@@ -10,12 +10,12 @@ app:
 ######################################
 deployment:
   enabled: true
-  replicaCount: 3
+  replicaCount: 1
   containers:
     - name: order-service-api
       image: youngmin1085/order-service
-      tag: latest
-      imagePullPolicy: Always
+      tag: v1.0.0
+      imagePullPolicy: IfNotPresent
       ports:
         - name: http
           containerPort: 8443
@@ -25,11 +25,11 @@ deployment:
           value: prod
       resources:
         requests:
-          cpu: "1"
-          memory: "1Gi"
+          cpu: "0.25"
+          memory: "0.5Gi"
         limits:
-          cpu: "1.5"
-          memory: "2Gi"
+          cpu: "0.5"
+          memory: "0.75Gi"
 
 ######################################
 # Service Config
