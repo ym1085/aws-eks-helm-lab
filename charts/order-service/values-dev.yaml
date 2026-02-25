@@ -54,7 +54,7 @@ ingress:
     proxyReadTimeout: "60"
     proxySendTimeout: "60"
     proxyBodySize: "8m"
-  ingressClassName: "nginx"
+  ingressClassName: "nginx-dev"
   rules:
     - http:
         paths:
