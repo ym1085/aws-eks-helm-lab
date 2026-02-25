@@ -48,13 +48,13 @@ service:
 ######################################
 ingress:
   enabled: true
-  annotations:
+  annotation:
     backendProtocol: "HTTP"
     proxyConnectTimeout: "10"
     proxyReadTimeout: "60"
     proxySendTimeout: "60"
     proxyBodySize: "8m"
-  ingressClassName: "nginx"
+  ingressClassName: "nginx-stg"
   rules:
     - http:
         paths:

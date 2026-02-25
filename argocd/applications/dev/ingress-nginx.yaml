@@ -13,6 +13,11 @@ spec:
     helm:
       values: |
         controller:
+          ingressClassResource:
+            name: nginx-dev
+            enabled: true
+            default: false
+            controllerValue: "k8s.io/ingress-nginx-dev" # 컨트롤러 식별자
           service:
             type: NodePort
             nodePorts: # NodePort를 사용하여 hostPort와 containerPort를 매핑

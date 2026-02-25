@@ -18,7 +18,7 @@ deployment:
       imagePullPolicy: IfNotPresent
       ports:
         - name: http
-          containerPort: 8081 
+          containerPort: 8081
           protocol: TCP
       env:
         - name: SPRING_PROFILES_ACTIVE
@@ -54,7 +54,7 @@ ingress:
     proxyReadTimeout: "30"
     proxySendTimeout: "30"
     proxyBodySize: "8m"
-  ingressClassName: "nginx"
+  ingressClassName: "nginx-stg"
   rules:
     - http:
         paths:
