@@ -13,6 +13,10 @@ spec:
     helm:
       values: |
         controller:
+          ingressClassResource:
+            name: nginx-prod
+            enabled: true
+            controllerValue: "k8s.io/ingress-nginx-prod"
           service:
             type: NodePort
             nodePorts:

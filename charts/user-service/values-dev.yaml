@@ -48,10 +48,10 @@ service:
 ######################################
 ingress:
   enabled: true
-  annotations:
+  annotation:
     backendProtocol: "HTTP" # Ingress와 backend service 간 통신 프로토콜
     proxyConnectTimeout: "10"
-  ingressClassName: "nginx" # 사용할 ingress controller 지정
+  ingressClassName: "nginx-dev" # 사용할 ingress controller 지정
   rules:
     - http:
         paths:

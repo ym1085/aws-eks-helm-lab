@@ -52,7 +52,7 @@ service:
 ingress:
   enabled: true
   annotation: {}
-  ingressClassName: "nginx"
+  ingressClassName: "nginx-dev"
   rules:
     - http:
         paths:

@@ -25,11 +25,11 @@ deployment:
           value: prod
       resources:
         requests:
-          cpu: "1"
-          memory: "1Gi"
+          cpu: "0.25"
+          memory: "0.5Gi"
         limits:
-          cpu: "1.5"
-          memory: "2Gi"
+          cpu: "0.5"
+          memory: "0.75Gi"
 
 ######################################
 # Service Configuration
@@ -48,13 +48,13 @@ service:
 ######################################
 ingress:
   enabled: true
-  annotations:
+  annotation:
     backendProtocol: "HTTP"
     proxyConnectTimeout: "10"
     proxyReadTimeout: "60"
     proxySendTimeout: "60"
     proxyBodySize: "8m"
-  ingressClassName: "nginx"
+  ingressClassName: "nginx-prod"
   rules:
     - http:
         paths:
