@@ -10,11 +10,12 @@ app:
 ######################################
 deployment:
   enabled: true
-  replicaCount: 3
+  replicaCount: 1
   containers:
     - name: user-service-api
       image: youngmin1085/user-service
-      tag: latest
+      tag: v1.0.0
+      imagePullPolicy: IfNotPresent
       ports:
         - name: http
           containerPort: 8443
